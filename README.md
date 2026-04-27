@@ -29,3 +29,77 @@ Transformer-based Summarization Model (BART)
         ↓
 Concise Meeting Summary
 ```
+
+## Data Source
+This project uses the QMSum dataset (Query-based Meeting Summarization).
+
+QMSum is a human-annotated benchmark dataset designed for meeting summarization tasks. It contains real-world meeting transcripts along with queries and corresponding reference summaries.
+
+Each data sample includes:
+
+* Transcript: a full meeting transcript
+* Query: a question or focus point
+* Reference Summary: a human-written summary relevant to the query
+
+The dataset contains:
+
+* 232 meetings
+* 1,808 query–summary pairs
+* Multiple domains (academic, business, etc.)
+
+Dataset Access
+
+You can download the dataset from:
+
+https://github.com/Yale-LILY/QMSum
+
+## Required Packages
+See `environment.yml`
+
+## How to Run
+
+### 1. Prepare the data and model folders
+
+Download the `qmsum` dataset folder and `outputs` folder from Google Drive:
+
+https://drive.google.com/drive/folders/1_Xac-cEpGRe0xZBhJgf00TPFQsZqgMPM?usp=drive_link
+
+### 2. Train the model
+Open and run: 
+```
+main.ipynb
+```
+
+In the first setup cell, update the paths if needed:
+```
+DATA_DIR = Path("/content/drive/MyDrive/498data/qmsum")
+
+OUTPUT_DIR = Path("/content/drive/MyDrive/498data/outputs/qmsum_large_bart")
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+```
+
+Then run all cells to train the model.
+
+### 3. Run the full pipeline
+To run the full pipeline from video to transcript to summary:
+```
+python full_pipeline.py
+```
+
+### 4. Run the web app
+Install dependencies
+```
+pip install gradio transformers torch faster-whisper
+```
+
+Run the Gradio web app locally:
+```
+python app.py
+```
+Then open the local URL shown in the terminal, usually:
+```
+http://127.0.0.1:7860
+```
+
+### 5. Other notebooks
+Other notebooks are used for testing, evaluation, and result visualization.
